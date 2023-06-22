@@ -13,8 +13,7 @@ if [[ $(id -u) -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
 fi
-if [ $(systemctl is-enabled stunnel4) == "disabled" ]; then
-
+if [ ! -f /etc/init.d/stunnel4 ]; then
    sleep 2
    echo "[SSH / SSL INSTALLER ]"
    echo "List of things:"
@@ -117,6 +116,5 @@ else
 
    # Remove user
    userdel aku
-
    echo "Done!"
 fi
