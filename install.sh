@@ -66,13 +66,22 @@ else
    clear
    apt-get update -y 
    echo "done 1"
+   sleep 3
    apt-get install wget -y
-   echo "done 2"  
+   echo "done 2"
+   sleep 3
    apt-get install curl -y
-   echo "done 3"  
+   echo "done 3"
+   sleep 3 
    apt-get install dropbear -y  
+   echo "done 4"
+   sleep 3
    apt-get install stunnel4 -y
+   echo "done 5"
+   sleep 3
    apt-get install sed -y  
+   echo "done 6"
+   sleep 3
    sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=21/g' /etc/default/dropbear
    clear
    sleep 3
