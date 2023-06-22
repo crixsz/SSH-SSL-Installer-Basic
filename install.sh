@@ -7,13 +7,45 @@ ORG="My Company"
 ORG_UNIT="IT"
 COMMON_NAME="www.test.com"
 EMAIL="admin@gmail.com"
+stunnel="/etc/init.d/stunnel4"
 
 clear 
 if [[ $(id -u) -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
 fi
-if [ ! -f /etc/init.d/stunnel4 ]; then
+if [ -f "$stunnel" ]; then
+   clear
+   echo "Reverting changes made by previous script..."
+
+   # Stop and disable udpgw service
+   systemctl stop udpgw.service
+   systemctl disable udpgw.service
+
+   # Remove udpgw service file
+   rm /etc/systemd/system/udpgw.service
+
+   # Remove udpgw binary
+   rm /usr/bin/badvpn-udpgw
+
+   # Remove stunnel config and certificate
+   rm /etc/stunnel/stunnel.conf
+   rm /etc/stunnel/stunnel.pem
+
+   # Remove dropbear changes
+   sed -i 's/DROPBEAR_PORT=21/DROPBEAR_PORT=22/g' /etc/default/dropbear
+   sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+
+   # Remove packages
+   apt-get remove --purge dropbear stunnel4 -y
+
+   # Remove /bin/false from shells file
+   sed -i '/\/bin\/false/d' /etc/shells
+
+   # Remove user
+   userdel aku
+   echo "Done!"
+else
    sleep 2
    echo "[SSH / SSL INSTALLER ]"
    echo "List of things:"
@@ -86,35 +118,4 @@ if [ ! -f /etc/init.d/stunnel4 ]; then
    echo "Password: aku"
    sleep 5
    rm /root/install.sh
-else
-   clear
-   echo "Reverting changes made by previous script..."
-
-   # Stop and disable udpgw service
-   systemctl stop udpgw.service
-   systemctl disable udpgw.service
-
-   # Remove udpgw service file
-   rm /etc/systemd/system/udpgw.service
-
-   # Remove udpgw binary
-   rm /usr/bin/badvpn-udpgw
-
-   # Remove stunnel config and certificate
-   rm /etc/stunnel/stunnel.conf
-   rm /etc/stunnel/stunnel.pem
-
-   # Remove dropbear changes
-   sed -i 's/DROPBEAR_PORT=21/DROPBEAR_PORT=22/g' /etc/default/dropbear
-   sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-
-   # Remove packages
-   apt-get remove --purge dropbear stunnel4 -y
-
-   # Remove /bin/false from shells file
-   sed -i '/\/bin\/false/d' /etc/shells
-
-   # Remove user
-   userdel aku
-   echo "Done!"
 fi
