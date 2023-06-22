@@ -63,7 +63,7 @@ else
    clear
    sleep 3
    echo "Generating certificates for stunnel..."
-   openssl req -x509 -newkey rsa:4096 -keyout stunnel.pem -out stunnel.pem -days 365 -nodes -subj "/C=$COUNTRY/ST=$STATE/L=$CITY/O=$ORG/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$EMAIL"
+   openssl req -x509 -newkey rsa:4096 -keyout stunnel.pem -out stunnel.pem -days 365 -nodes -subj "/C=$COUNTRY/ST=$STATE/L=$CITY/O=$ORG/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$EMAIL" >> /dev/null
    mv stunnel.pem /etc/stunnel/
    touch /etc/stunnel/stunnel.conf
    echo "
@@ -77,7 +77,7 @@ else
    #!/bin/sh
    OS=`uname -m`;
    wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw" >> /dev/null
-   if [ "$OS" == "x86_64" ]; then
+   if [ "$OS" == "x86_64" ]; then   
       wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw64" >> /dev/null
    fi
    chmod +x /usr/bin/badvpn-udpgw
