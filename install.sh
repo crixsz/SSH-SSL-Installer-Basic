@@ -52,6 +52,7 @@ else
    echo "2. Stunnel4"
    echo "3. UDPGW" 
    echo "Starting installation ... "
+   sleep 3
    clear
    apt-get update -y 
    apt-get install wget -y 
