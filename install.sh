@@ -33,12 +33,13 @@ sleep 3
 echo "Generating certificates for stunnel..."
 openssl req -x509 -newkey rsa:4096 -keyout stunnel.pem -out stunnel.pem -days 365 -nodes -subj "/C=$COUNTRY/ST=$STATE/L=$CITY/O=$ORG/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$EMAIL"
 mv stunnel.pem /etc/stunnel/
+touch /etc/stunnel/stunnel.conf
 echo -e "
 [dropbear]
 accept = 80
 connect = 21
 cert = /etc/stunnel/stunnel.pem
-" >> && tee -a /etc/stunnel/stunnel.conf
+" >> /etc/stunnel/stunnel.conf
 clear
 sleep 3
 echo "Installing UDPGW and service of udpgw.service"
