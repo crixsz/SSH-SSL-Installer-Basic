@@ -83,6 +83,6 @@ echo "[ User Information ]"
 echo "Username: aku"
 echo "Password: aku"
 sleep 5
-
+rm /root/install.sh
 
 
