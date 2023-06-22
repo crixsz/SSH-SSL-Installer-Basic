@@ -38,8 +38,7 @@ echo -e "
 accept = 80
 connect = 21
 cert = /etc/stunnel/stunnel.pem
-"
-tee -a /etc/stunnel/stunnel.conf
+" >> && tee -a /etc/stunnel/stunnel.conf
 clear
 sleep 3
 echo "Installing UDPGW and service of udpgw.service"
