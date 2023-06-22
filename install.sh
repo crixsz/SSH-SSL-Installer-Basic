@@ -21,7 +21,6 @@ echo "2. Stunnel4"
 echo "3. UDPGW" 
 echo "Starting installation ... "
 apt-get update -y >> /dev/null
-apt-get upgrade -y >> /dev/null
 apt-get install wget -y >> /dev/null
 apt-get install curl -y >> /dev/null
 apt-get install dropbear -y >> /dev/null
