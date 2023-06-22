@@ -49,6 +49,7 @@ else
    echo "2. Stunnel4"
    echo "3. UDPGW" 
    echo "Starting installation ... "
+   clear
    apt-get update -y 
    apt-get install wget -y 
    apt-get install curl -y 
@@ -67,15 +68,14 @@ else
    accept = 80
    connect = 21
    cert = /etc/stunnel/stunnel.pem
-   " >> /etc/stunnel/stunnel.conf
-   clear
+   " >> /etc/stunnel/stunnel.conf > /dev/null
    sleep 3
    echo "Installing UDPGW and service of udpgw.service"
    #!/bin/sh
    OS=`uname -m`;
-   wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw" 
+   wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw" > /dev/null
    if [ "$OS" == "x86_64" ]; then
-      wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw64" /dev/null
+      wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw64" > /dev/null
    fi
    chmod +x /usr/bin/badvpn-udpgw
    # Echo the service file contents
@@ -90,7 +90,7 @@ else
    Restart=always
 
    [Install]
-   WantedBy=multi-user.target" >> /etc/systemd/system/udpgw.service
+   WantedBy=multi-user.target" >> /etc/systemd/system/udpgw.service > /dev/null
    systemctl daemon-reload
    systemctl enable udpgw.service
    systemctl restart udpgw.service
