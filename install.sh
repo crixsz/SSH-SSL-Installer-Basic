@@ -8,11 +8,21 @@ ORG_UNIT="IT"
 COMMON_NAME="www.test.com"
 EMAIL="admin@gmail.com"
 stunnel="/etc/init.d/stunnel4"
-
+#add ports for easy checking 
 clear 
 if [[ $(id -u) -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
+fi
+if [ -f "/usr/bin/ports" ]; then
+   echo "Skipped"
+else
+   apt install net-tools -y
+   touch /usr/bin/ports
+   chmod +x /usr/bin/ports
+   echo "
+      netstat -tulpn | grep LISTEN
+   " >> /usr/bin/ports
 fi
 if [ -f "$stunnel" ]; then
    clear
@@ -55,16 +65,19 @@ else
    sleep 3
    clear
    apt-get update -y 
-   apt-get install wget -y 
-   apt-get install curl -y 
-   apt-get install dropbear -y 
-   apt-get install stunnel4 -y 
-   apt-get install sed -y 
+   echo "done 1"
+   apt-get install wget -y
+   echo "done 2"  
+   apt-get install curl -y
+   echo "done 3"  
+   apt-get install dropbear -y  
+   apt-get install stunnel4 -y
+   apt-get install sed -y  
    sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=21/g' /etc/default/dropbear
    clear
    sleep 3
    echo "Generating certificates for stunnel..."
-   openssl req -x509 -newkey rsa:4096 -keyout stunnel.pem -out stunnel.pem -days 365 -nodes -subj "/C=$COUNTRY/ST=$STATE/L=$CITY/O=$ORG/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$EMAIL" >> /dev/null
+   openssl req -x509 -newkey rsa:4096 -keyout stunnel.pem -out stunnel.pem -days 365 -nodes -subj "/C=$COUNTRY/ST=$STATE/L=$CITY/O=$ORG/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$EMAIL" 
    mv stunnel.pem /etc/stunnel/
    touch /etc/stunnel/stunnel.conf
    echo "
