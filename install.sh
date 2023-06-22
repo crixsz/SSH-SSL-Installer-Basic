@@ -98,7 +98,9 @@ else
    clear
    echo "
    /bin/false" >> /etc/shells
+   sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
    systemctl restart stunnel4
+   systemctl restart dropbear
    echo "Creating user.."
    sleep 3
    useradd aku -M -s /bin/false
