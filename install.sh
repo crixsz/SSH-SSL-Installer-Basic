@@ -81,7 +81,7 @@ else
    sleep 3
    apt-get install sed -y  
    echo "done 6"
-   sleep 3
+   sleep 4
    sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=21/g' /etc/default/dropbear
    clear
    sleep 3
