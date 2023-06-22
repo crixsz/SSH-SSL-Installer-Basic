@@ -32,10 +32,6 @@ if [ -f "$stunnel" ]; then
    rm /etc/stunnel/stunnel.conf
    rm /etc/stunnel/stunnel.pem
 
-   # Remove dropbear changes
-   sed -i 's/DROPBEAR_PORT=21/DROPBEAR_PORT=22/g' /etc/default/dropbear
-   sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-
    # Remove packages
    apt-get remove --purge dropbear stunnel4 -y
 
@@ -60,7 +56,6 @@ else
    apt-get install stunnel4 -y 
    apt-get install sed -y 
    sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=21/g' /etc/default/dropbear
-   sed -i 's/NO_START=0/NO_START=1/g' /etc/default/dropbear
    clear
    sleep 3
    echo "Generating certificates for stunnel..."
