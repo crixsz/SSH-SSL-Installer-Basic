@@ -68,7 +68,7 @@ else
    accept = 80
    connect = 21
    cert = /etc/stunnel/stunnel.pem
-   " >> /etc/stunnel/stunnel.conf > /dev/null
+   " >> /etc/stunnel/stunnel.conf
    sleep 3
    echo "Installing UDPGW and service of udpgw.service"
    #!/bin/sh
@@ -90,7 +90,7 @@ else
    Restart=always
 
    [Install]
-   WantedBy=multi-user.target" >> /etc/systemd/system/udpgw.service > /dev/null
+   WantedBy=multi-user.target" >> /etc/systemd/system/udpgw.service 
    systemctl daemon-reload
    systemctl enable udpgw.service
    systemctl restart udpgw.service
