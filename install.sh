@@ -20,12 +20,12 @@ echo "1. Dropbear"
 echo "2. Stunnel4"
 echo "3. UDPGW" 
 echo "Starting installation ... "
-apt-get update -y >> /dev/null
-apt-get install wget -y >> /dev/null
-apt-get install curl -y >> /dev/null
-apt-get install dropbear -y >> /dev/null
-apt-get install stunnel4 -y >> /dev/null
-apt-get install sed -y >> /dev/null
+apt-get update -y 
+apt-get install wget -y 
+apt-get install curl -y 
+apt-get install dropbear -y 
+apt-get install stunnel4 -y 
+apt-get install sed -y 
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=21/g' /etc/default/dropbear
 sed -i 's/NO_START=0/NO_START=1/g' /etc/default/dropbear
 clear
@@ -45,7 +45,7 @@ sleep 3
 echo "Installing UDPGW and service of udpgw.service"
 #!/bin/sh
 OS=`uname -m`;
- wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw" >> /dev/null
+ wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw" 
 if [ "$OS" == "x86_64" ]; then
    wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw64" /dev/null
 fi
