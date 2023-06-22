@@ -39,6 +39,9 @@ if [ -f "$stunnel" ]; then
    sed -i '/\/bin\/false/d' /etc/shells
 
    # Remove user
+   systemctl daemon-reload
+   clear
+   sleep 2
    userdel aku
    echo "Done!"
 else
@@ -73,9 +76,9 @@ else
    echo "Installing UDPGW and service of udpgw.service"
    #!/bin/sh
    OS=`uname -m`;
-   wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw" > /dev/null
+   wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw" >> /dev/null
    if [ "$OS" == "x86_64" ]; then
-      wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw64" > /dev/null
+      wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/daybreakersx/premscript/master/badvpn-udpgw64" >> /dev/null
    fi
    chmod +x /usr/bin/badvpn-udpgw
    # Echo the service file contents
