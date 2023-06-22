@@ -70,6 +70,7 @@ sleep 2
 clear
 echo "
 /bin/false" >> /etc/shells
+systemctl restart stunnel4
 echo "Creating user.."
 sleep 3
 useradd aku -M -s /bin/false
@@ -78,6 +79,7 @@ echo "[ SSH Info ]"
 echo "SSL Port: 80"
 echo "Dropbear Port: 22"
 echo "UDPGW Port: 7300"
+clear
 echo "[ User Information ]"
 echo "Username: aku"
 echo "Password: aku"
